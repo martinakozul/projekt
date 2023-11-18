@@ -1,6 +1,10 @@
+const NUM_OF_ASTEROIDS = 30
+const GENERATION_INTERVAL = 5000
 var userSpaceship;
 var asteroids;
 var frameCount = 0;
+
+var generate;
 
 window.addEventListener("keydown", moveSpaceship, false)
 function moveSpaceship(e) {
@@ -38,7 +42,10 @@ function moveSpaceship(e) {
 function startGame() {
     asteroids = []
     userSpaceship = new spaceship(30, 30, window.innerWidth/2, window.innerHeight/2) 
-    generateAsteroids(30)
+    generateAsteroids(NUM_OF_ASTEROIDS)
+    generate = setInterval(function() { //generate new asteroids every 5 seconds
+        generateAsteroids(NUM_OF_ASTEROIDS)
+    }, GENERATION_INTERVAL);
     myGameArea.start();
 }
 
@@ -110,6 +117,7 @@ function generateRandomInt(min, max) {
             if (asteroids[i].collisionWithSpaceship()) {
                 myGameArea.stop()
                 userSpaceship.isEnabled = false
+                generate.clear()
             }
         }
     }
