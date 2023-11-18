@@ -14,6 +14,7 @@ var generateInterval;
 var timerInterval;
 
 function startGame() {
+    [milliseconds,seconds,minutes] = [0,0,0] //reset inital timer values to 0
     asteroids = []
     userSpaceship = new spaceship(30, 30, window.innerWidth/2, window.innerHeight/2) //beginning location should be in the middle of the screen => window.innerWidth/2, window.innerHeight/2
     generateAsteroids(NUM_OF_ASTEROIDS)
