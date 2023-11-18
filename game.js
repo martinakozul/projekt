@@ -73,9 +73,14 @@ function generateAsteroids(numOfAsteroids) {
     for (let i = 0; i < numOfAsteroids; i++) { 
         let comingFromTop = generateRandomInt(0, 1) 
         let comingFromLeft = generateRandomInt(0, 1)
-        let startWidth = (comingFromLeft == 1) ? generateRandomInt(-200, 0) : generateRandomInt(window.innerWidth + 100, window.innerWidth + 300);
-        let startHeight = (comingFromTop == 1) ? generateRandomInt(-200, 0) : generateRandomInt(window.innerHeight+ 100, window.innerHeight + 300);
+
+        //generate asteroid at most 200px outside of the frame 
+        let startWidth = (comingFromLeft == 1) ? generateRandomInt(-200, 0) : generateRandomInt(window.innerWidth, window.innerWidth + 200);
+        let startHeight = (comingFromTop == 1) ? generateRandomInt(-200, 0) : generateRandomInt(window.innerHeight, window.innerHeight + 200);
+
+        //asteroids coming from left must have positive x speed to move toward the visible part of canvas
         let speedX = (comingFromLeft == 1) ? generateRandomInt(2, 5) : generateRandomInt(-5, -2);
+        //asteroids coming from top must have negative y speed to move toward the visible part of canvas
         let speedY = (comingFromTop == 1) ? generateRandomInt(-5, -2) : generateRandomInt(2, 5);
         asteroids[asteroids.length] = new asteroid(startWidth, startHeight, speedX, speedY) 
     }
