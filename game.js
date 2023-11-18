@@ -170,8 +170,10 @@ function generateRandomInt(min, max) {
             if (asteroids[i].collisionWithSpaceship()) {
                 userSpaceship.isEnabled = false //disable moving after collision
                 myGameArea.stop()
-                startGame() //reset automatically
                 saveTimeIfBest()
+                clearInterval(timerInterval)
+                clearInterval(generateInterval)
+                startGame() //reset automatically
             }
         }
     }
