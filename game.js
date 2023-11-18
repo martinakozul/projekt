@@ -168,9 +168,10 @@ function generateRandomInt(min, max) {
         //check if any of the generated asteroids overlaps with the spaceship
         for (let i = 0; i < asteroids.length; i++) { 
             if (asteroids[i].collisionWithSpaceship()) {
+                userSpaceship.isEnabled = false //disable moving after collision
                 myGameArea.stop()
                 saveTimeIfBest()
-                location.reload()
+                location.reload() //reset game automatically
             }
         }
     }
@@ -197,6 +198,7 @@ function generateRandomInt(min, max) {
 		this.height = height;
 		this.speed_x = 2;
 		this.speed_y = 2;
+        this.isEnabled = true;
 		this.x = x;
 		this.y = y;
 		this.update = function() {
@@ -213,11 +215,15 @@ function generateRandomInt(min, max) {
 		}
         this.moveX = function(direction) {
             //direction value 1 if should move in right, -1 otherwise
-            this.x += this.speed_x  * direction * 10
+            if (this.isEnabled){
+                this.x += this.speed_x  * direction * 10
+            }
         }
         this.moveY = function(direction) {
             //direction value 1 if should move down, -1 otherwise
-            this.y += this.speed_y * direction  * 10
+            if (this.isEnabled){
+                this.y += this.speed_y * direction  * 10
+            }
         }
 	}
 	
