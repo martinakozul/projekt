@@ -168,6 +168,7 @@ function generateRandomInt(min, max) {
         //check if any of the generated asteroids overlaps with the spaceship
         for (let i = 0; i < asteroids.length; i++) { 
             if (asteroids[i].collisionWithSpaceship()) {
+                myGameArea.stop()
                 saveTimeIfBest()
                 location.reload()
             }
